@@ -280,7 +280,7 @@ app.post("/validation/:tokenGen",(req,res)=>{
     
 });
 
-app.post("/inscription",securedConnect.ensureLoggedOut({redirectTo:'/page'}),(req,res)=>{
+app.post("/inscription",(req,res)=>{
     console.log(donnee_connect[donnee_connect.length-1])
     let { prenom, nom,email,contact,mat,ugf, mp, rp_mp } = req.body;
     
@@ -346,7 +346,7 @@ app.post("/inscription",securedConnect.ensureLoggedOut({redirectTo:'/page'}),(re
                         });
                         var mailOptions={
                             from :"alphacodant@gmail.com",
-                            to :"djobianicethugue@gmail.com" ,
+                            to :"alphacodant@gmail.com" ,
                             subject : `Demande d'autorisation d'accès à la l'Application WebSig de ${nom} ${prenom}`,
                             text : `M.(Mme) ${nom} ${prenom} de matricule ${mat} en service à l'Unité de Gestion Forestière de ${ugf} joignable au ${contact} ou par email via ${email} souhaiterait avoir l'accès à la plateforme WebSig du centre de Gestion. Veillez cliquer sur ce lien pour valider sa demande.\n http://localhost:${port}/valid/`+tokenGen
                         };
