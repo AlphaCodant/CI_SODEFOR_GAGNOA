@@ -142,9 +142,7 @@ app.set('view engine','ejs');
 
 
 app.get('/',(req,res)=>{
-    res.json(control[0]);
-    control=[];
-    console.log()
+    res.redirect('/dashboard');
 });
 
 app.get('/dashboard',(req,res)=>{
