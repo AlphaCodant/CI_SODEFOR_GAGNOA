@@ -1,26 +1,3 @@
-# Ignore les fichiers de configuration de l'IDE (exemples pour VSCode)
 .vscode/
-
-# Ignore les fichiers du système d'exploitation
-.DS_Store
-Thumbs.db
-
-# Ignore les répertoires de dépendances (les modules installés par npm)
 node_modules/
-
-# Ignore le fichier .env contenant des variables d'environnement
 .env
-
-# Ignore les fichiers de logs
-*.log
-
-# Ignore les fichiers de build (si tu utilises un système de build)
-dist/
-
-# Ignore les fichiers de couverture de code (exemple avec Jest)
-coverage/
-
-# Ignore les fichiers générés par npm (lock files si tu veux ne pas les versionner)
-npm-debug.log
-yarn-debug.log
-yarn-error.log
