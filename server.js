@@ -142,9 +142,7 @@ app.set('view engine','ejs');
 
 
 app.get('/',(req,res)=>{
-    res.json(control[0]);
-    control=[];
-    console.log()
+    res.redirect('/dashboard');
 });
 
 app.get('/dashboard',(req,res)=>{
@@ -156,8 +154,13 @@ app.get('/stats',(req,res)=>{
 app.get('/fiche',(req,res)=>{
     res.render('table');
 });
-app.get('/statistiques',(req,res)=>{
-    res.render('ch_stats');
+app.get('/statistiques/:id',authenticateToken,(req,res)=>{
+    const {tokenY} = req.user;
+    res.render('ch_stats',{id:tokenY});
+});
+app.get('/statistiques',authenticateToken,(req,res)=>{
+    const {tokenY} = req.user;
+    res.redirect(`/statistiques/${tokenY}`);
 });
 
 app.get('/connexion',securedConnect.ensureLoggedOut({redirectTo:'/page'}),(req,res)=>{
@@ -242,7 +245,7 @@ app.post("/validation/:tokenGen",(req,res)=>{
                                     service : "gmail",
                                     auth:{
                                         user :"alphacodant@gmail.com",
-                                        pass :process.env.PWD
+                                        pass :"khwr jbvk vstt nyhe"
                                     }
                                 });
                                 var mailOptions={
@@ -282,7 +285,7 @@ app.post("/validation/:tokenGen",(req,res)=>{
     
 });
 
-app.post("/inscription",securedConnect.ensureLoggedOut({redirectTo:'/page'}),(req,res)=>{
+app.post("/inscription",(req,res)=>{
     console.log(donnee_connect[donnee_connect.length-1])
     let { prenom, nom,email,contact,mat,ugf, mp, rp_mp } = req.body;
     
@@ -343,12 +346,12 @@ app.post("/inscription",securedConnect.ensureLoggedOut({redirectTo:'/page'}),(re
                             service : "gmail",
                             auth:{
                                 user :"alphacodant@gmail.com",
-                                pass :process.env.PWD
+                                pass :"khwr jbvk vstt nyhe"
                             }
                         });
                         var mailOptions={
                             from :"alphacodant@gmail.com",
-                            to :"djobianicethugue@gmail.com" ,
+                            to :"alphacodant@gmail.com" ,
                             subject : `Demande d'autorisation d'accès à la l'Application WebSig de ${nom} ${prenom}`,
                             text : `M.(Mme) ${nom} ${prenom} de matricule ${mat} en service à l'Unité de Gestion Forestière de ${ugf} joignable au ${contact} ou par email via ${email} souhaiterait avoir l'accès à la plateforme WebSig du centre de Gestion. Veillez cliquer sur ce lien pour valider sa demande.\n http://localhost:${port}/valid/`+tokenGen
                         };
