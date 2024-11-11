@@ -156,8 +156,13 @@ app.get('/stats',(req,res)=>{
 app.get('/fiche',(req,res)=>{
     res.render('table');
 });
-app.get('/statistiques',(req,res)=>{
-    res.render('ch_stats');
+app.get('/statistiques/:id',authenticateToken,(req,res)=>{
+    const {tokenY} = req.user;
+    res.render('ch_stats',{id:tokenY});
+});
+app.get('/statistiques',authenticateToken,(req,res)=>{
+    const {tokenY} = req.user;
+    res.redirect(`/statistiques/${tokenY}`);
 });
 
 app.get('/connexion',securedConnect.ensureLoggedOut({redirectTo:'/page'}),(req,res)=>{
@@ -242,7 +247,7 @@ app.post("/validation/:tokenGen",(req,res)=>{
                                     service : "gmail",
                                     auth:{
                                         user :"alphacodant@gmail.com",
-                                        pass :process.env.PWD
+                                        pass :"khwr jbvk vstt nyhe"
                                     }
                                 });
                                 var mailOptions={
@@ -343,7 +348,7 @@ app.post("/inscription",securedConnect.ensureLoggedOut({redirectTo:'/page'}),(re
                             service : "gmail",
                             auth:{
                                 user :"alphacodant@gmail.com",
-                                pass :process.env.PWD
+                                pass :"khwr jbvk vstt nyhe"
                             }
                         });
                         var mailOptions={
